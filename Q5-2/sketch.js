@@ -18,8 +18,13 @@ function balloon(t, x, y){
   push();
 
   // BLANK[1] 吹き出しの背景を先に描く
+  fill(0);   //黒い背景
+  noStroke();
+  rect(x, y, w+p*2, h+p*2, 5);
+
 
   // BLANK[2] 吹き出しの三角形を描く
+  triangle(x+10, y+h+p*2, x+20, y+h+p*2, x+15, y+h+p*2+10);
 
   // 吹き出しのテキストを次に描く
   textAlign(LEFT, CENTER);

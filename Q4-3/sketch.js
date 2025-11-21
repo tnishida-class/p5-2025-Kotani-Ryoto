@@ -49,6 +49,15 @@ function draw(){
 
   if(frameCount % 20 === 0) { // 20フレームごとに新しい的を追加する
     // BLANK[1] 新しい的オブジェクトを作成して targets 配列に追加しよう
+    //tの初期条件を求め、それをtarget配列に代入
+    const t = {
+      x: width/2,
+      y: height/2,
+      size: 5,
+      vx: random(-6,6),
+      vy: random(-6,6),
+    };
+    targets.push(t);
   }
 
   // ボールに当たった or 大きくなりすぎた的を配列から削除する
@@ -60,6 +69,17 @@ function draw(){
       for(let j = 0; j < balls.length; j++){ // すべてのボールと衝突判定
         let b = balls[j];
         // BLANK[2]
+        const dx = b.x - t.x;
+        const dy = b.y - t.y;
+        //dは的とボールの中心間の距離の二乗（三平方の定理）
+        const d = dx * dx + dy * dy;
+        //radiusSumとは的とボールの半径の和（b.size,t.sizeはそれぞれの直径）
+        const radiusSum = (b.size + t.size) / 2;
+        if(d<radiusSum*radiusSum){
+          hit = true;
+          //ここでbreakを使うのは一回でも的とボールがヒットしたら消えるためこれ以上衝突を考える必要がない
+          break;
+        }
       }
       if(!hit) activeTargets.push(t); // 衝突していなければ生き残る
     }

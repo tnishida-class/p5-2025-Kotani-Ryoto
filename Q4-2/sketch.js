@@ -18,6 +18,20 @@ function setup(){
   const dx = width / scores.length;
   let px, py; // 線を引くために一つ前の点を覚えておく変数
   for(let i = 0; i < scores.length; i++){
-    // BLANK[1]
+    px = i * dx + 15;
+    py = height - (height*scores[i]/100);
+      // pxとpy：一個前の点
+    x = (i+1) * dx + 15;
+    y = height - (height*scores[i+1]/100);
+      // xとy：現在の点
+
+    stroke(0);   // 点の色：黒
+    strokeWeight(8);   // 点の大きさ
+    point(px,py);
+    point(x,y);
+
+    stroke(0);   // 黒色の線
+    strokeWeight(2);   // 線の太さ
+    line(px,py,x,y);
   }
 }
